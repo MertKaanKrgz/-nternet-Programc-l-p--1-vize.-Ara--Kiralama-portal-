@@ -1,0 +1,92 @@
+﻿@model Car
+
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="ImageUrl" hidden />
+
+    <div class="row">
+        <div class="col-10">
+
+
+                <div class="border p-3 mt-5">
+                    <div class="row pb-3">
+                        <h2 class="text-primary">@(Model == null ? "Araç Ekle" : "Araç Güncelle")</h2>
+                        </hr>
+                    </div>
+
+                    <div class="mb=3">
+                        <label asp-for="Name" class="p-0"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb=3">
+                        <label asp-for="CarTypeId" class="p-0"></label>
+                        <select asp-for="CarTypeId" asp-items="ViewBag.CarTypeList" class="form-select">
+                        </select>
+
+                    </div>
+                    <div class="mb=3">
+                        <label asp-for="Definition" class="p-0"></label>
+                        <input asp-for="Definition" class="form-control" />
+                        <span asp-validation-for="Definition" class="text-danger"></span>
+                    </div>
+                    <div class="mb=3">
+                        <label asp-for="Brand" class="p-0"></label>
+                        <input asp-for="Brand" class="form-control" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+                    <div class="mb=3">
+                        <label asp-for="Price" class="p-0"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="mb=3">
+                        <label asp-for="ImageUrl" class="p-0"></label>
+                        <input type="file" name="file" class="form-control" />
+                    </div>
+
+                    @if (Model != null)
+                    {
+                        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Güncelle</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Araç Ekle</button>
+
+                    }
+                    <a asp-controller="Car" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+                        Araç Türlerine Geri Dön
+                    </a>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="col-2">
+            @if (Model != null)
+            {                            
+                <img src="@Model.ImageUrl" width="100%"
+                    stayle="border-redius:7px; border:1px solid #bbb9b9"/>
+            }
+
+        
+        
+        
+        
+        </div>
+    </div>
+
+
+
+
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>    
+    }
+}
+
+

@@ -1,0 +1,42 @@
+﻿@model Rental
+
+
+<form method="post">
+    <input asp-for="Id" hidden/>
+
+    <div class="border p-3 mt-5">
+        <div class="row pb-3">
+            <h2 class="twxt-primary">Kiralama Kayıt Sil</h2>
+            </hr>
+        </div>      
+
+        <div class="mb=3">
+            <label asp-for="CustomerId" class="p-0"></label>
+            <input asp-for="CustomerId" class="form-control" />
+        </div>
+
+        
+        
+        
+
+        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Kiralama İptal</button>
+
+        <a asp-controller="Rental" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+            Kiralamalara geri dön
+        </a>
+
+
+
+    </div>
+
+
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+
+

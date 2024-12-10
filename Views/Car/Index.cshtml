@@ -1,0 +1,86 @@
+﻿@model List<Car>
+
+@if (TempData["basarili"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["basarili"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+<div class="conteiner">
+
+    <div class ="row pt-3 pb-4"
+        <div>
+            <h1>Araçlar</h1>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Definition
+                </th>
+                
+                <th>  
+                    Brand
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    CarTypeId
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var car in Model)
+            { 
+                <tr>
+                    <td>@car.Id</td>
+                    <td>@car.Name</td>
+                    <td>@car.Definition</td>
+                    <td>@car.Brand</td>
+                    <td>@car.Price</td>
+                    <td>@car.CarTypeId</td>
+                    <td>
+                        <a asp-controller="Car" asp-action="AddUpdate" asp-route-id="@car.Id" type="button" class="btn btn-info" style="width:150px">Güncelle</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" type="button" class="btn btn-danger" style="width:150px">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
+
+
+    </table>
+
+    <div class="row pt-3 pb-2">
+        <div>
+            <a asp-controller="Rental" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="button">
+                Yeni Araç Oluştur
+
+            </a>
+        </div>
+
+    </div>
+
+
+</div>
