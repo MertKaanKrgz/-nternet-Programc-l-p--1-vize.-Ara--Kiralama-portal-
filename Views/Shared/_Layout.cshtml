@@ -22,19 +22,52 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
+                        
+
+                        @if (User.IsInRole(AppRole.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="CarType" asp-action="Index">Araç Türü Sayfası</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Araçları Düzenle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Rental" asp-action="Index">Kiralama Sayfası</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Araçlar Sayfası</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SignalR" asp-action="Index">Canlı Mesajlaş</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Notes" asp-action="Index">Borcu Olanlar Listesi</a>
+                            </li>
+                        }
+
+                        
+                        
+                            
+
+
+
+                        
+
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Hakkımızda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CarType" asp-action="Index">Araç Türü Sayfası</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Araçlar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Rental" asp-action="Index">Kiralama Sayfası</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">İletişim</a>
                         </li>
                     </ul>
+
+                    <partial name="_LoginPartial" />
+
+
+
+
                 </div>
             </div>  
         </nav>
@@ -45,13 +78,11 @@
             @RenderBody()
         </main>
     </div>
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-    </div>
+    
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; Mert Kaan Kırgöz tarafından internet programcılığı vize projesi olarak yapılmıştır.- <a asp-area="" asp-controller="Home" asp-action="">Hakkımızda</a>
+            &copy; Mert Kaan Kırgöz tarafından internet programcılığı FİNAL projesi olarak yapılmıştır.- <a asp-area="" asp-controller="Home" asp-action="Privacy">İletişim</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

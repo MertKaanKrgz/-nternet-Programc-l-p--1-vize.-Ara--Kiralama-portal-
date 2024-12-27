@@ -1,4 +1,6 @@
 ﻿using CarRentalPortal.Models;
+using CarRentalPortal.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +8,23 @@ namespace CarRentalPortal.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ICarRepository _carRepository;
+        private readonly ICarTypeRepository _carTypeRepository;
+        public readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICarRepository carRepository, ICarTypeRepository carTypeRepository, IWebHostEnvironment webHostEnvironment)
         {
-            _logger = logger;
+            _carRepository = carRepository;
+            _carTypeRepository = carTypeRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
+       
         public IActionResult Index()
         {
-            return View();
+            List<Car> objCarList = _carRepository.GetAll(includeProps: "CarType").ToList();
+
+            return View(objCarList);
         }
 
         public IActionResult Privacy()

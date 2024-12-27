@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Notlar";
+}
+@{
+    Layout = "_AdminLayout";
+}
+<div class="container mt-4">
+    <h2>Not Ekleme Sayfası</h2>
+    <hr />
+
+    <!-- Not Ekleme Formu -->
+    <div class="mb-3">
+        <label for="noteInput" class="form-label">Yeni Not</label>
+        <input type="text" id="noteInput" class="form-control" placeholder="Notunuzu yazın">
+    </div>
+    <button id="addNoteButton" class="btn btn-primary">Not Ekle</button>
+
+    <!-- Not Listesi -->
+    <div class="mt-4">
+        <h4>Not Listesi</h4>
+        <ul id="noteList" class="list-group">
+            <!-- Dinamik olarak notlar buraya eklenecek -->
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Notları yükle
+        loadNotes();
+
+        // Not ekleme işlemi
+        $('#addNoteButton').on('click', function () {
+            const note = $('#noteInput').val().trim();
+            if (note) {
+                $.post('/Not/AddNote', { note: note }, function (response) {
+                    if (response.success) {
+                        $('#noteInput').val(''); // Input'u temizle
+                        renderNotes(response.notes); // Notları güncelle
+                    } else {
+                        alert('Not eklenirken bir hata oluştu.');
+                    }
+                });
+            } else {
+                alert('Lütfen bir not girin.');
+            }
+        });
+
+        // Notları yükle ve listele
+        function loadNotes() {
+            $.get('/Not/GetNotes', function (notes) {
+                renderNotes(notes);
+            });
+        }
+
+        // Not listesini ekrana yazdır
+        function renderNotes(notes) {
+            const noteList = $('#noteList');
+            noteList.empty(); // Eski notları temizle
+            notes.forEach(function (note, index) {
+                noteList.append(<li class="list-group-item">${index + 1}. ${note}</li>);
+            });
+        }
+    });
+</script>

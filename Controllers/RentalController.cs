@@ -1,11 +1,13 @@
 ﻿ using CarRentalPortal.Models;
 using CarRentalPortal.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace CarRentalPortal.Controllers
 {
+    [Authorize(Roles = AppRole.Role_Admin)]
     public class RentalController : Controller
     {
         private readonly IRentalRepository _rentalRepository;
@@ -18,6 +20,7 @@ namespace CarRentalPortal.Controllers
             _carRepository = carRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
         public IActionResult Index()
         {
             // List<Car> objCarList = _carRepository.GetAll().ToList();

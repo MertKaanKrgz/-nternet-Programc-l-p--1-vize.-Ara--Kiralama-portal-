@@ -1,10 +1,12 @@
 ﻿using CarRentalPortal.Models;
 using CarRentalPortal.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace CarRentalPortal.Controllers
 {
+    [Authorize(Roles = AppRole.Role_Admin)]
     public class CarTypeController : Controller
     {
         private readonly ICarTypeRepository _carTypeRepository;

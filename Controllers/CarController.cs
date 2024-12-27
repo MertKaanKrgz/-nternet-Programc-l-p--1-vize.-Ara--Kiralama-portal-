@@ -1,11 +1,13 @@
 ﻿using CarRentalPortal.Models;
 using CarRentalPortal.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace CarRentalPortal.Controllers
 {
+    
     public class CarController : Controller
     {
         private readonly ICarRepository _carRepository;
@@ -18,14 +20,16 @@ namespace CarRentalPortal.Controllers
             _carTypeRepository = carTypeRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Authorize(Roles = "Admin,Customer")]
         public IActionResult Index()
-        {
-            // List<Car> objCarList = _carRepository.GetAll().ToList();
+        {          
             List<Car> objCarList = _carRepository.GetAll(includeProps:"CarType").ToList();
 
             return View(objCarList);
         }
 
+        [Authorize(Roles = AppRole.Role_Admin)]
         public IActionResult AddUpdate(int? id)
         {
 
@@ -58,6 +62,7 @@ namespace CarRentalPortal.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AppRole.Role_Admin)]
         public IActionResult AddUpdate(Car car, IFormFile? file) 
         {           
             if (ModelState.IsValid)
@@ -73,7 +78,7 @@ namespace CarRentalPortal.Controllers
                 {
                     file.CopyTo(fileStream);
                 }
-                car.ImageUrl = @"\img" + file.FileName;
+                car.ImageUrl = @"\img\" + file.FileName;
                 } 
 
                 if (car.Id == 0)
@@ -123,9 +128,9 @@ namespace CarRentalPortal.Controllers
            }
            return View();
        }
+        */
 
-
-       public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id)
        {
            if (id == null || id == 0)
            {
@@ -139,9 +144,10 @@ namespace CarRentalPortal.Controllers
            }
            return View(carVt);
        }
-       */
+       
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = AppRole.Role_Admin)]
         public IActionResult DeletePOST(int? id)
         {
             Car? car = _carRepository.Get(u => u.Id == id);

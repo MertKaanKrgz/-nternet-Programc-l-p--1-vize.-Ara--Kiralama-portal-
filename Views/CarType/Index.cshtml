@@ -1,69 +1,60 @@
 ﻿@model List<CarType>
+@{
+    Layout = "_AdminLayout";
+}
 
 @if (TempData["basarili"] != null)
 {
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         @TempData["basarili"]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-
-<div class="conteiner">
-
-    <div class ="row pt-3 pb-4"
-        <div>
-            <h1>Araç Türleri</h1>
+<div class="container">
+    <div class="row pt-3 pb-4">
+        <div class="col">
+            <h1 class="text-center">Araç Türleri</h1>
         </div>
     </div>
 
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Araç Türü
-                </th>
-                <th>
-                    Güncelleme İşlemi
-                </th>
-                <th>
-                    Silme İşlemi
-                </th>
+                <th>Id</th>
+                <th>Araç Türü</th>
+                <th>Güncelleme İşlemi</th>
+                <th>Silme İşlemi</th>
             </tr>
         </thead>
-
         <tbody>
             @foreach (var carType in Model)
-            { 
+            {
                 <tr>
                     <td>@carType.Id</td>
                     <td>@carType.Name</td>
                     <td>
-                        <a asp-controller="CarType" asp-action="Update" asp-route-id="@carType.Id" type="button" class="btn btn-info" style="width:150px">Güncelle</a>
+                        <a asp-controller="CarType" asp-action="Update" asp-route-id="@carType.Id"
+                           class="btn btn-info btn-sm">
+                            <i class="fa fa-pencil"></i> Güncelle
+                        </a>
                     </td>
                     <td>
-                        <a asp-controller="CarType" asp-action="Delete" asp-route-id="@carType.Id" type="button" class="btn btn-danger" style="width:150px">Sil</a>
+                        <a asp-controller="CarType" asp-action="Delete" asp-route-id="@carType.Id"
+                           class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i> Sil
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
-        
-
-
     </table>
 
     <div class="row pt-3 pb-2">
-        <div>
-            <a asp-controller="CarType" asp-action="Add" class="btn btn-lg btn-primary" type="button">
-                Yeni Araç Türü Oluştur
-
+        <div class="col text-end">
+            <a asp-controller="CarType" asp-action="Add" class="btn btn-lg btn-primary">
+                <i class="fa fa-plus"></i> Yeni Araç Türü Oluştur
             </a>
         </div>
-
     </div>
-
-
 </div>

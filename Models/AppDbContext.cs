@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CarRentalPortal.Models;
 
 namespace CarRentalPortal.Models
 {
@@ -11,6 +12,8 @@ namespace CarRentalPortal.Models
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
+
 
 
 
